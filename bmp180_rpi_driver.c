@@ -11,6 +11,7 @@
 
 #include "bmp180.h"
 #include "bmp180_rpi_driver.h"
+#include "rpi_utils.h"
 
 // These 3 functions are the delegate functions for the Bosch driver
 s8 BMP180_I2C_bus_read(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
@@ -52,9 +53,8 @@ void BMP180_delay_msek(u32 msek) {
 
 // Inplementation of the function to initialize the connection with the I2C device
 int I2C_Setup(int dev_addr) {
-    if (i2c_fd <= 0) {
-        //Temporarely hardcoded to 1 for RPi2
-        int adapter_nr = 1;
+    if (i2c_fd <= 0) {        
+        int adapter_nr = get_rpi_model() >= RPI_2B_11 ? 1 : 0;
         char filename[20];
     
         snprintf(filename, 19, "/dev/i2c-%d", adapter_nr);
