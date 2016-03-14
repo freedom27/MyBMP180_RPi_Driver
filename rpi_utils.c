@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <errno.h>
 #include <string.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <time.h>
 
 #include "rpi_utils.h"
 
