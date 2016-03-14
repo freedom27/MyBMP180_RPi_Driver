@@ -28,27 +28,27 @@ int i2c_fd = -1;
 // Implementation of the delegate functions for the Bosch driver
 s8 BMP180_I2C_bus_write(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt) {
     s32 iError = BMP180_INIT_VALUE;
-	u8 stringpos = BMP180_INIT_VALUE;
-	for (stringpos = BMP180_INIT_VALUE; stringpos < cnt; stringpos++) {
+    u8 stringpos = BMP180_INIT_VALUE;
+    for (stringpos = BMP180_INIT_VALUE; stringpos < cnt; stringpos++) {
         iError = i2c_smbus_write_word_data(i2c_fd, reg_addr + stringpos, *(reg_data + stringpos));
-	}
+    }
 
-	return (s8)iError;
+    return (s8)iError;
 }
 
 s8 BMP180_I2C_bus_read(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt) { 
     s32 iError = BMP180_INIT_VALUE;
-	u8 stringpos = BMP180_INIT_VALUE;
+    u8 stringpos = BMP180_INIT_VALUE;
     
-	for (stringpos = BMP180_INIT_VALUE; stringpos < cnt; stringpos++) {
+    for (stringpos = BMP180_INIT_VALUE; stringpos < cnt; stringpos++) {
         *(reg_data + stringpos) = i2c_smbus_read_word_data(i2c_fd, reg_addr + stringpos);
-	}
+    }
     
-	return (s8)iError;
+    return (s8)iError;
 }
 
 void BMP180_delay_msek(u32 msek) {
-	usleep(msek * 1000);
+    usleep(msek * 1000);
 }
 
 // Inplementation of the function to initialize the connection with the I2C device
